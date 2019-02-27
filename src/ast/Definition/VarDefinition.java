@@ -8,4 +8,8 @@ public class VarDefinition extends AbstractDefinition implements Definition {
 		super(row, column, n, t);
 	}
 
+	public VarDefinition(int row, int column, String n) {
+		super(row, column, n);
+	}
+
 }

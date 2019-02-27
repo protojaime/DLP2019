@@ -8,10 +8,20 @@ public abstract class AbstractDefinition extends AbstractASTNode implements Defi
 	String Name;
 	Type type;
 
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public AbstractDefinition(int row, int column, String n, Type t) {
 		super(row, column);
 		Name = n;
 		type = t;
+	}
+
+	public AbstractDefinition(int row, int column, String n) {
+		super(row, column);
+		Name = n;
+
 	}
 
 	@Override

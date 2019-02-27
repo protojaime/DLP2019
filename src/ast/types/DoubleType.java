@@ -1,5 +1,5 @@
 package ast.types;
 
-public class DoubleType implements Type {
+public class DoubleType extends AbstractType implements Type {
 
 }

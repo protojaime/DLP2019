@@ -16,4 +16,28 @@ public class IfStatement extends AbstractStatement implements Statement {
 		ElseBody = bodye;
 	}
 
+	public ArrayList<Statement> getBody() {
+		return Body;
+	}
+
+	public void setBody(ArrayList<Statement> body) {
+		Body = body;
+	}
+
+	public ArrayList<Statement> getElseBody() {
+		return ElseBody;
+	}
+
+	public void setElseBody(ArrayList<Statement> elseBody) {
+		ElseBody = elseBody;
+	}
+
+	public Expression getExpression() {
+		return Expression;
+	}
+
+	public void setExpression(Expression expression) {
+		Expression = expression;
+	}
+
 }

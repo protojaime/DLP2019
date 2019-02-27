@@ -1,5 +1,5 @@
 package ast.types;
 
-public class VoidType implements Type {
+public class VoidType extends AbstractType implements Type {
 
 }

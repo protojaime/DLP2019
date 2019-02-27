@@ -1,5 +1,5 @@
 package ast.types;
 
-public class CharType implements Type {
+public class CharType extends AbstractType implements Type {
 
 }
