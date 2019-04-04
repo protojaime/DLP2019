@@ -10,7 +10,7 @@ public abstract class AbstractASTNode implements ASTNode {
 	}
 
 	@Override
-	public int getRow() {
+	public int getLine() {
 		return row;
 	}
 

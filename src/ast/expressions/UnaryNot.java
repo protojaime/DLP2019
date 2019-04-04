@@ -1,6 +1,7 @@
 package ast.expressions;
 
 import ast.types.Type;
+import semantic.Visitor;
 
 public class UnaryNot extends AbstractExpression implements Expression {
 	Expression expression;
@@ -14,4 +15,18 @@ public class UnaryNot extends AbstractExpression implements Expression {
 		super(row, column, t);
 		this.expression = expression;
 	}
+
+	@Override
+	public Object Accept(Visitor v, Object o) {
+		return v.Visit(this, o);
+	}
+
+	public Expression getExpression() {
+		return expression;
+	}
+
+	public void setExpression(Expression expression) {
+		this.expression = expression;
+	}
+
 }

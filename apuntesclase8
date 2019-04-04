@@ -1,0 +1,22 @@
+en el del while e if debemos comprobar que la condicion es logica
+booleans: si es 0 es falso, sino verdadero(modear con entero)
+para la comprobación de tipos logicos, metemos un nuevo metodo llamado islogical y ponemos como respuesta false en todo menos type
+si el tipo no es logical, el tipo de la condicion pasa a ser un error, el error que causa esto
+para las binarias, recorremos las expresiones primero y luego le preguntamos con Arithmetic(Type): Type
+si es nulo entonces ponemos un error en el que avisamos de que no se puede hacer una operación 
+Arithmetic retorna int si es int con int, double si es double con double y errortype si es errortype con nada
+el null solo se devuelve si no hay un error con la operación. es para evitar que haya tantos errores como operandos, sino que haya un solo arror para donde ocurra un error en el arbol
+Arithmetic() Type, para unary minus, devolveria null en todo excepto int y double
+comparation() Type devuelve entero si los numeros se pueden comparar, independientemente de que sean doubles o no
+logical(Type): Type lo implementa entero para las logicas, logical() Type lo implementa entero tambien con le negación
+
+para cast hacemos el metodo canBeCast(Type): Type; solo lo implementan los tipos simples
+isBuildInType() Bool; se usa entre otras cosas si no se ha dividido en el sintactico los tipos simples
+
+para el acceso a campo usamos Dot(String) Type, imlementado por struct. buscar si el string esta como nombre de un field. si no esta null
+SquareBraquets (Type) Type lo implementa array, para el resto es null. si el tipo que pasan es entero, devolvemos type del array. en los otros casos null
+para la asignacion creamos promotesTo(Type) Type devolvemos el tipo que nos pasan o null 
+
+para invocacion de una función: 
++Parenthesis(List<size>), Type , solo lo va a implementar funciontype. comprobamos primero que el tamaño es igual al del functype, y luego si los tipos coinciden con los tipos en el de la functype con el promotesTo. si todo sale bien devuelves el tipo de retorno
+pensar como resolver que la sentencia return definida tenga el mismo tipo de l tipo returntype de la func 

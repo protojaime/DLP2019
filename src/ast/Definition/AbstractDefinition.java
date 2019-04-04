@@ -7,6 +7,7 @@ public abstract class AbstractDefinition extends AbstractASTNode implements Defi
 
 	String Name;
 	Type type;
+	int Scope;
 
 	public void setType(Type type) {
 		this.type = type;
@@ -36,8 +37,11 @@ public abstract class AbstractDefinition extends AbstractASTNode implements Defi
 
 	@Override
 	public int getScope() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Scope;
+	}
+
+	public void setScope(int scope) {
+		Scope = scope;
 	}
 
 }
