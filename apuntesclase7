@@ -1,0 +1,30 @@
+estableceremos variables en esta clase
+a efectos conceptuales 
+-variable ahora contiene una definicion
+____________                    ____________________
+variable   !__________________>!   Definition
+___________!    definition: 1  !___________________
+
+Almacenaremos las definiciones y las variables en un hashmap string->def por cada scope que tengamos (que pueden ser infinitos)
+cuando buscamos la definicion de una variable lo hacemos en la tabla de mayor scope, y si no esta ahi buscamos en la anterior. si llegamos a la final y no hay variable se dalta un error de que no existe
+las tablas hash de una scope se eliminan cuando salimos de esta scope, y esta forma parte del visitor
+en la clase SymbolTable tendrems una pila de definiciónes
+
+
+clase symboltable tiene usa asociacion cualificada (mediante String) de uno a muchos con Definition
+symboltable tambien tiene scope al añadir una tabla se sube el scope, al quitarla la elimina
+tiene un insert(definition) en el que se define la scope. la scope de una funcion seria inicialmente 0 
+la tabla de simbolos no crea errores
+
+findincurrentScope
+find encontrara una definición en todos los hash
+
+creamos un identificationVisitor en el paquete semantic
+
+al llegar a una definición de variable en el visitor hacemos insert
+
+al llegar a una variable hacemos el find. si encontramos una definición se la asignamos al nuevo campo. si no encontramos nada error
+
+para definición de funcion hay que subir el scope hacer accept de todas las definiciones 
+
+tenemos una clase de prueba. para que esta funcione tenemos que activar los asertos y añadir el argumento -e (no estoy seguro de si era este exaactamente, preguntar luego)

@@ -1,0 +1,124 @@
+Codegenerator tiene metodo OutPrintWriter
+por cada instruccione a bajo nivel hacemos un metodo en code generator: Push(int), Push(char)
+algunas instrucciones recibiran un tipo 
+ejemplo
+public void pushBP(){
+
+}
+tendremos las core funcions execute, value y address
+dominio de la función de elementos a los que les podemos pedir un valor: expressión
+dominio de la función de elementos a los que les podemos pedir un address: Lvalues
+dominio de la función de elementos a los que les podemos pedir un execute: statement/definiciones/programa
+
+pr cada una de las funciones vamos a tener un visitor
+
+(no usar visit abstracto)
+si lo usais no os vais a enterar haste que inicialiceis el programa
+hacemos un abstractcodegeneratorvisitor del que heredan los3 nuevos visitor
+el visitor pr defecto va a saltar una excepcion: IllegalStateException"code generation template": this.getClass().getName()
+con esto nos enteraremos a la hora de generar el codigo
+el visitor de ejecución necesita conocer a esos dos, el de address necesito valor
+la dirección depende del indice al parecer
+codegenerator encargadod e metodo salida y bajo nivel
+En el main ahora pedimos des parametros, entrada y salida
+vamos al final del main y creamos un generadorde codigo que pasamos al visitor de ejecutar
+a partir del visitor de ejecutar:2 atributos valuevisitor y address visitor
+con el mismo generador de codigo creams los otros dos visitors en el constructor el de execute
+address tiene lo de valor
+
+
+no hagis prueba y error
+es mucho mas facil planear la plantilla
+para definir plantilla de generacion de codigo 
+
+EXECUTE[[ program:program-> Definition* ]]
+
+<CALL MAIN>
+<HALT>
+FOR(Definition d:Definition*){
+if (d instanceof funcdefinition)
+{
+EXECUTE[[d]]
+}
+
+EXECUTE[[ WRITE:STA->EXP ]]()
+VALUE[[EXP]]()
+<OUT>EXPTYPE.STUFF
+EXECUTE[[read:sta->exp]]()
+address[[EXP]]()
+<in>EXPRTYPE.SUFFIX()
+<store>EXPR.TYPESUFFIX()
+
+
+ASSig:sta.>exp,exp2
+address[[exp]]
+value[[exp2]]
+<store>expr1.rtpe.sufix
+
+VALUE[[var:exp->ID]]()
+Address[[exp]]
+<load> exp.type.suf
+
+Address[[Var:exp->ID]]()
+eXPR.definition.sTORE==0)
+<PUSH A>EXP.DEFINITIONEFFSET
+ELSE{
+<PUSH BP>
+<PUSH i> EXP. DEFINITION.OFFSET
+<ADDI>
+
+VALUE[[Arithmetic: Exp1->EXP2 EXP3]]
+val[[exp2]]()=
+value[[EXP2]]()
+cg.CONVERTTO(EXP2.TYPE, EXP1.TYPE))
+
+VALUE[[EXP3]]()
+CG.CONVERTTO(EXP3.TYPE, EXP1.TYPE()
+
+CG.ARITHMETIC(EXP1, EXP?????????????????????????????)
+
+
+execute[[FUNDEFINITION:DEFSTYLE STA*]]()
+
+DEF.NAME<:> 
+<eNTER>def.localsbytes
+//GUARDAR EL ATRIBUTO OFFSET EN UN ATRIBUTI NUEVO DE FUNdEF CUANDO SE ACABLE EL BUCLE DEL VISITOR DE LA CLASE ANTERIOR
+FOR(STA S:STA){
+IF(S TODEFINITION){
+EXECUTE[[S]]()
+}}
+IF(tYPE.RETURNTYPE io VOIDTYPE){
+//NUEVO ATRIBUTO TIPO FUNCIÓN DE TAMAÑO
+//O COGER EL PRIMER PARAMETRO Y SUMMARSELO A SU TAMAÑO
+<DEF>,DELOCALBYTES,PARAMBYTES
+}
+}
+
+
+
+
+
+
+}
+
+
+------------------------------
+
+visit(write, Func){
+cg.commit("write")
+write.expression.accept(...)???????????
+
+}
+----------------------------------
+
+
+--------------------------------------
+store (type){
+type.suffix()
+// nuevo tipo a los tipos basicos
+//implementación predeterminada
+}
+
+
+
+}

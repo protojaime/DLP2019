@@ -1,0 +1,17 @@
+manera de hacer return: pasar como parametro object el tipo de retorno de la funcin y tratarlo en las sentencias return
+no es necesario comprobar que comprobemos que haya un return 
+hoy haremos sintesis
+formula general de variables globales: sumatorio del total de las variables anteriores
+formula general de variables locales:BP - sumatorio del total de las variables anteriores mas su propio tamaño
+formula general de parametros: BP + 4 + sumatorio tamaño argumentos a su derecha sin incluirse a si mismo
+los warnings en la maquina nueva de la clase 9, los warnings son errores
+los offsets se calculan en las Definiciones de variable. es necesario saber lo que ocupa cada tipo, por tanto se añade un metodo size(): int en la interfaz type, el cual devuelve lo que ocupa ese tipo
+como no tenemos delegados en este lenguaje, el tipo función no necesita offset
+el offset lo guardamos en Defvariable, con un atributo offset
+OffsetVisitor es el que se encargara de todo esto
+el offset de una definición de variable se definira en el visitor de defvariable
+tenemos que tener un contador global como atributo en el visitor para poder calcular el offset de las variables globales que van siguiente
+vamos a suponer de primeras que una no glibal es una variable local. igual que las globales necesitamos un contador. aqui primer incrmeentamos el contador y luego lo asignamos como offset con el simbolo cambiado
+hay que resetear el contador con cada visita a una funcion 
+aqui no propagamos la llamada a los parametros, y con un for calculamos el offset de los parametros con un orden a la inversa. es una manera parecida para el tipo struct y los fields
+el visitor deberia tener 3 metodos al final: 2 con un for cada uno y otro con dos ifs

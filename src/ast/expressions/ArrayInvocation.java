@@ -1,6 +1,7 @@
 package ast.expressions;
 
 import ast.types.Type;
+import semantic.Visitor;
 
 public class ArrayInvocation extends AbstractBinaryExpression implements Expression {
 
@@ -12,4 +13,8 @@ public class ArrayInvocation extends AbstractBinaryExpression implements Express
 		super(row, column, t, A, B);
 	}
 
+	@Override
+	public Object Accept(Visitor v, Object o) {
+		return v.Visit(this, o);
+	}
 }
