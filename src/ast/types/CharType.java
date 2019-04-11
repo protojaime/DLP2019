@@ -26,4 +26,14 @@ public class CharType extends AbstractType implements Type {
 		return null;
 	}
 
+	@Override
+	public int offsetSize() {
+		return 1;
+	}
+
+	@Override
+	public String getSuffix() {
+		return "b";
+	}
+
 }

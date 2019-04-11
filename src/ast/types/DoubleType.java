@@ -48,4 +48,13 @@ public class DoubleType extends AbstractType implements Type {
 		return null;
 	}
 
+	@Override
+	public int offsetSize() {
+		return 4;
+	}
+
+	@Override
+	public String getSuffix() {
+		return "f";
+	}
 }

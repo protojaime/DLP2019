@@ -65,4 +65,15 @@ public class IntType extends AbstractType implements Type {
 		}
 		return null;
 	}
+
+	@Override
+	public int offsetSize() {
+		return 2;
+	}
+
+	@Override
+	public String getSuffix() {
+		return "i";
+	}
+
 }

@@ -39,10 +39,12 @@ public interface Type extends ASTNode {
 	 * returns the offset size of the type, not to be confused with arraysize in
 	 * type
 	 */
-	public int size();
+	public int offsetSize();
 
 	/*
 	 * metodo usado para UnaryMinus
 	 */
 	public Type Arithmetic();
+
+	String getSuffix();
 }

@@ -86,8 +86,12 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
 	}
 
 	@Override
-	public int size() {
+	public int offsetSize() {
 		return 0;
 	}
 
+	@Override
+	public String getSuffix() {
+		return null;
+	}
 }
