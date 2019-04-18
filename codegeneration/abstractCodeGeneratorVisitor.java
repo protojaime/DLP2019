@@ -41,189 +41,189 @@ public class abstractCodeGeneratorVisitor {
 
 		@Override
 		public Object Visit(Program d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 
 		}
 
 		@Override
 		public Object Visit(Arithmetic d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ArrayInvocation d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Cast d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Comparation d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(FieldAccess d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Logical d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(UnaryMinus d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(UnaryNot d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Variable d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ConstantInt d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ConstantChar d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ConstantDouble d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(FuncionDefinition d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(VarDefinition d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Asigment d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(IfStatement d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			
 			return null;
 		}
 
 		@Override
 		public Object Visit(WhileStatement d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Input d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Print d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Return d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ArrayType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(CharType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(DoubleType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(ErrorType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(IntType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(Field d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(VoidType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(StructType d, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(FuncionInvocation funcionInvocation, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 
 		@Override
 		public Object Visit(FuncionType funcionType, Object o) {
-			throw IllegalStateException("template not implemented");
+			throw IllegalStateException("code generation template": this.getClass().getName());
 			return null;
 		}
 	}
