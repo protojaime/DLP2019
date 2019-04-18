@@ -1,29 +1,33 @@
+package codegeneration;
+import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.Map;
 
 public class CodeGenerator {
 	HashMap<String, String> Operations = new HashMap<String, String>();
 	HashMap<String, String> LogicOperations = new HashMap<String, String>();
-	
-	CodeGenerator(){
+	private PrintStream stream;
+
+	public CodeGenerator(PrintStream s) {
+		stream = s;
 		Operations.put("<", "gt");
 		Operations.put(">", "lt");
 		Operations.put("<=", "ge");
 		Operations.put(">=", "le");
 		Operations.put("==", "eq");
-		Operations.put("!=", "ne"); 
+		Operations.put("!=", "ne");
 		LogicOperations.put("&&", "and");
 		LogicOperations.put("||", "or");
 		LogicOperations.put("!", "not");
 	}
-	
+
 	public void getLogicOperation(String OP) {
-		stream.println("\t"+LogicOperations.get(OP) +"\t");
+		stream.println("\t" + LogicOperations.get(OP) + "\t");
 	}
-	public void getOperation(String OP,String suffix) {
-		stream.println("\t"+Operations.get(OP) + suffix +"\t");
+
+	public void getOperation(String OP, String suffix) {
+		stream.println("\t" + Operations.get(OP) + suffix + "\t");
 	}
-	
+
 	public void pushbp() {
 		stream.println("\tpush\tbp");
 	}
@@ -33,7 +37,7 @@ public class CodeGenerator {
 	}
 
 	public void push(String suffix, String value) {
-		stream.println("\tpush" + suffix +"\t" + value);
+		stream.println("\tpush" + suffix + "\t" + value);
 	}
 
 	public void pop(String suffix) {
@@ -55,12 +59,11 @@ public class CodeGenerator {
 	public void load(String suffix) {
 		stream.println("\tload" + suffix);
 	}
+
 	public void dup(String suffix) {
 		stream.println("\tdup" + suffix);
 	}
-	
-	
-	
+
 	public void jumpIfZero(String label) {
 		stream.println("\tjz\t" + label);
 	}
@@ -68,6 +71,7 @@ public class CodeGenerator {
 	public void jumpIfNoZero(String label) {
 		stream.println("\tjnz\t" + label);
 	}
+
 	public void jump(String label) {
 		stream.println("\tjmp\t" + label);
 	}
