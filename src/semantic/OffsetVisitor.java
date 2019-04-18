@@ -9,7 +9,6 @@ public class OffsetVisitor extends AbstractVisitor {
 	int globalOffset = 0;
 	private int LocalOffset = 0;
 	private int parameterOffset = 4;
-	// private int offsetArrayFields = 0;
 
 	@Override
 	public Object Visit(FuncionDefinition d, Object o) {

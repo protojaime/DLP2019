@@ -35,6 +35,11 @@ import ast.types.VoidType;
 import semantic.Visitor;
 
 public abstract class abstractCodeGeneratorVisitor implements Visitor {
+	CodeGenerator cg;
+
+	abstractCodeGeneratorVisitor(CodeGenerator c) {
+		cg = c;
+	}
 
 	@Override
 	public Object Visit(Program d, Object o) {

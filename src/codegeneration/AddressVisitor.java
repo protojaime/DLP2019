@@ -5,6 +5,13 @@ import ast.expressions.FieldAccess;
 import ast.expressions.Variable;
 
 public class AddressVisitor extends abstractCodeGeneratorVisitor {
+	ValueVisitor vv;
+
+	AddressVisitor(CodeGenerator c, ValueVisitor v) {
+		super(c);
+		vv = v;
+
+	}
 
 	@Override
 	public Object Visit(Variable d, Object o) {
