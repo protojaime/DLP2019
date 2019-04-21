@@ -28,6 +28,18 @@ import ast.types.VoidType;
 public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 
 	@Override
+	public Object Visit(FieldAccess d, Object o) {
+		super.Visit(d, o);
+		Type t = d.getExpression().getType().Dot(d.getName());
+		if (t == null) {
+			d.setType(new ErrorType(d.getLine(), d.getColumn(), "this field doesn't exist", ErrorHandler.getEH()));
+
+		}
+		d.setType(t);
+		return null;
+	}
+
+	@Override
 	public Object Visit(Asigment d, Object o) {
 		super.Visit(d, o);
 		Type t = d.ExpressionA.getType().promotesTo(d.ExpressionB.getType());
@@ -105,17 +117,6 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 		if (t == null) {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(), "you cannot compare these two types",
 					ErrorHandler.getEH()));
-		}
-		return null;
-	}
-
-	@Override
-	public Object Visit(FieldAccess d, Object o) {
-		super.Visit(d, o);
-		Type t = d.getExpression().getType().Dot(d.getName());
-		if (t == null) {
-			d.setType(new ErrorType(d.getLine(), d.getColumn(), "this field doesn't exist", ErrorHandler.getEH()));
-
 		}
 		return null;
 	}

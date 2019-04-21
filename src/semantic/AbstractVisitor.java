@@ -43,7 +43,6 @@ public abstract class AbstractVisitor implements Visitor {
 			def.Accept(this, o);
 		}
 		return null;
-
 	}
 
 	@Override
