@@ -1,9 +1,13 @@
+import java.io.PrintStream;
+
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import ast.ErrorHandler;
 import ast.Program;
+import codegeneration.CodeGenerator;
+import codegeneration.ExecuteVisitor;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import parser.PmmLexer;
@@ -40,11 +44,20 @@ public class Main {
 		ast.Accept(tv, new Object());
 
 		if (ErrorHandler.getEH().hasErrors()) {
-
 			ErrorHandler.getEH().showErrors(System.out);
 		}
+
 		// * The AST is shown
 		IntrospectorModel model = new IntrospectorModel("Program", ast);
 		new IntrospectorTree("Introspector", model);
+
+		// code generation section
+		PrintStream output = new PrintStream(args[1]);
+		CodeGenerator cg = new CodeGenerator(output);
+		// Execute visitor contains the other two visitors,
+		// all of them using the same codegenerator & output
+		ExecuteVisitor exv = new ExecuteVisitor(cg);
+		ast.Accept(exv, new Object());
+
 	}
 }
