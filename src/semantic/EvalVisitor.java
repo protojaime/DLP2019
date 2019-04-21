@@ -48,7 +48,6 @@ public class EvalVisitor extends AbstractVisitor implements Visitor {
 	public Object Visit(ArrayInvocation d, Object o) {
 		d.setLvalue(true);
 		super.Visit(d, o);
-
 		return null;
 	}
 

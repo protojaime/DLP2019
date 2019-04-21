@@ -1,4 +1,5 @@
 package codegeneration;
+
 import java.io.PrintStream;
 import java.util.HashMap;
 
@@ -15,6 +16,10 @@ public class CodeGenerator {
 		Operations.put(">=", "le");
 		Operations.put("==", "eq");
 		Operations.put("!=", "ne");
+		Operations.put("+", "add");
+		Operations.put("-", "sub");
+		Operations.put("*", "mul");
+		Operations.put("/", "div");
 		LogicOperations.put("&&", "and");
 		LogicOperations.put("||", "or");
 		LogicOperations.put("!", "not");
@@ -82,5 +87,22 @@ public class CodeGenerator {
 
 	public void in(String suffix) {
 		stream.println("\tin" + suffix);
+	}
+
+	public void halt() {
+		stream.println("\thalt");
+
+	}
+
+	public void label(String name) {
+		stream.println(name + ":");
+	}
+
+	public void comment(String c) {
+		stream.println("#" + c);
+	}
+
+	public void line(int line) {
+		this.comment("line " + line);
 	}
 }
