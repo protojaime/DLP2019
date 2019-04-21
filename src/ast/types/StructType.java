@@ -21,6 +21,15 @@ public class StructType extends AbstractType {
 		return Fieldlist;
 	}
 
+	public Field getField(String name) {
+		if (!this.Fieldlist.contains(new Field(0, 0, name))) {
+			return null;
+		} else {
+			return this.Fieldlist.get(this.Fieldlist.indexOf(new Field(0, 0, name)));
+		}
+
+	}
+
 	public void FieldlistAdd(Field f) {
 		if (this.Fieldlist.contains(f)) {
 			new ErrorType(f.getLine(), f.getColumn(), "same field exist within this struct", ErrorHandler.getEH());
