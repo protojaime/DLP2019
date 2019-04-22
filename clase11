@@ -1,0 +1,39 @@
+
+los 3 visitors de la clase anterior:
+el visitorValue ahora tendra una relacion bidireccional con visitoraddress (se conocen mutuamente) . puede hacerse con un set y un get, con un instance o como se vea, cualquiera 
+
+para if lo mejor seria hacer un diagrama de flujo: recuerda saltarte el else
+usar etiquetas para el else
+para no repetir etiquetas hacer un contador de etiquetas en el codegenerator para añadir 
+
+
+execute[[IF:STM->EXP SRM*1 STM*2]]()
+INT ELSE = CG.GETLABEL();
+INT END = CG.GETLABEL();
+VALUE[[EXP]]()
+<JZ LABEL-> ELSE
+FOR(STM S.STM1*)
+EXECUTE[[S]]()
+<JMP LABEL> END
+<LABEL-> ELSE <:>
+FOR(STM S.STM2*)
+ EXECUTE[[S]]()
+ <LABEL->END
+ 
+-----------------------------------------
+ 
+ execute[[WHILE:STM->EXP SRM*]]()
+INT START = CG.GETLABEL();
+INT END = CG.GETLABEL();
+<LABEL-> START <:>
+VALUE[[EXP]]()
+<JZ LABEL-> END
+FOR(STM S.STM*)
+EXECUTE[[S]]()
+<JMP LABEL> START
+ <LABEL->END
+ 
+ PODRIA USARSE DUP PARA MEJORARLO
+ 
+ 
+ 

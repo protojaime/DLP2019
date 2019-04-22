@@ -100,25 +100,25 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(Variable d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(ConstantInt d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(ConstantChar d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(ConstantDouble d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -126,9 +126,7 @@ public abstract class AbstractVisitor implements Visitor {
 	public Object Visit(FuncionDefinition d, Object o) {
 		d.getType().Accept(this, o);
 		for (Statement def : d.getStatements()) {
-
 			def.Accept(this, o);
-
 		}
 
 		return null;
@@ -201,25 +199,25 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(CharType d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(DoubleType d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(ErrorType d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Object Visit(IntType d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -231,7 +229,7 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(VoidType d, Object o) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
