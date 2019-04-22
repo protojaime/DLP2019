@@ -45,8 +45,8 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(VarDefinition d, Object o) {
-		super.Visit(d, o);
-
+		this.cg.line(d.getLine());
+		this.cg.comment(d.getName() + ":" + d.getType().getClass().getName());
 		return null;
 	}
 

@@ -1,8 +1,9 @@
-package semantic;
+package codegeneration;
 
 import ast.Definition.FuncionDefinition;
 import ast.Definition.VarDefinition;
 import ast.types.FuncionType;
+import semantic.AbstractVisitor;
 
 public class OffsetVisitor extends AbstractVisitor {
 
@@ -13,6 +14,9 @@ public class OffsetVisitor extends AbstractVisitor {
 	@Override
 	public Object Visit(FuncionDefinition d, Object o) {
 		super.Visit(d, o);
+		d.setBytesLocalVariables(LocalOffset);
+		d.setBytesParameters(parameterOffset);
+
 		LocalOffset = 0;
 		parameterOffset = 4;
 		return null;

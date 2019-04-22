@@ -7,6 +7,25 @@ import ast.types.Type;
 import semantic.Visitor;
 
 public class FuncionDefinition extends AbstractDefinition implements Definition {
+	private int BytesParameters;
+	private int BytesLocalVariables;
+
+	public int getBytesParameters() {
+		return BytesParameters;
+	}
+
+	public void setBytesParameters(int bytesParameters) {
+		BytesParameters = bytesParameters;
+	}
+
+	public int getBytesLocalVariables() {
+		return BytesLocalVariables;
+	}
+
+	public void setBytesLocalVariables(int bytesLocalVariables) {
+		BytesLocalVariables = bytesLocalVariables;
+	}
+
 	ArrayList<Statement> statements = new ArrayList<Statement>();
 
 	public ArrayList<Statement> getStatements() {
