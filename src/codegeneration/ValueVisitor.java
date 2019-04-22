@@ -17,6 +17,16 @@ import ast.expressions.Variable;
 
 public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
+	public AddressVisitor getAv() {
+		return av;
+	}
+
+	public void setAv(AddressVisitor av) {
+		this.av = av;
+	}
+
+	AddressVisitor av;
+
 	ValueVisitor(CodeGenerator c) {
 		super(c);
 	}

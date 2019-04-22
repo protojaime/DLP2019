@@ -57,7 +57,8 @@ public class Main {
 		// Execute visitor contains the other two visitors,
 		// all of them using the same codegenerator & output
 		ExecuteVisitor exv = new ExecuteVisitor(cg);
-		ast.Accept(exv, new Object());
 
+		ast.Accept(exv, new Object());
 	}
+
 }
