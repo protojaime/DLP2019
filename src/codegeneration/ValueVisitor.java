@@ -43,9 +43,10 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Arithmetic d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
-
+		d.ExpressionA.Accept(this, o);
+		d.ExpressionB.Accept(this, o);
+		// this.cg.push(d.ExpressionA.getType().getSuffix(), d.ExpressionA.toString());
+		// this.cg.push(d.ExpressionB.getType().getSuffix(), d.ExpressionB.toString());
 		return null;
 	}
 
@@ -107,9 +108,7 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Variable d, Object o) {
-		d.setLvalue(true);
 		super.Visit(d, o);
-
 		return null;
 	}
 
