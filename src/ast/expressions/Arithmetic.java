@@ -16,6 +16,14 @@ public class Arithmetic extends AbstractBinaryExpression implements Expression {
 		Operator = operator;
 	}
 
+	public String getOperator() {
+		return Operator;
+	}
+
+	public void setOperator(String operator) {
+		Operator = operator;
+	}
+
 	@Override
 	public Object Accept(Visitor v, Object o) {
 		return v.Visit(this, o);
