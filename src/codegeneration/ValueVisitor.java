@@ -60,17 +60,17 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Cast d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
+		d.getEx().Accept(this, o);
+		this.cg.convert(d.getEx().getType(), d.getImplementedType());
 
 		return null;
 	}
 
 	@Override
 	public Object Visit(Comparation d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
-
+		d.ExpressionA.Accept(this, o);
+		d.ExpressionB.Accept(this, o);
+		this.cg.getOperation(d.getOperator(), d.getType().getSuffix());
 		return null;
 	}
 
@@ -84,16 +84,15 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Logical d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
+		d.ExpressionA.Accept(this, o);
+		d.ExpressionB.Accept(this, o);
+		this.cg.getOperation(d.getOperator(), d.getType().getSuffix());
 
 		return null;
 	}
 
 	@Override
 	public Object Visit(UnaryMinus d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
 
 		return null;
 	}

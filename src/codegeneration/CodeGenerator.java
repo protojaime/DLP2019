@@ -3,6 +3,8 @@ package codegeneration;
 import java.io.PrintStream;
 import java.util.HashMap;
 
+import ast.types.Type;
+
 public class CodeGenerator {
 	HashMap<String, String> Operations = new HashMap<String, String>();
 	HashMap<String, String> LogicOperations = new HashMap<String, String>();
@@ -136,5 +138,17 @@ public class CodeGenerator {
 
 	public void print(String text) {
 		stream.println(text);
+	}
+
+	public void convert(Type type, Type implementedType) {
+		if (!type.equals(implementedType)) {
+			if (type.getSuffix().equals("i") || implementedType.getSuffix().equals("i"))
+				stream.println("\t" + type.getSuffix() + "2" + implementedType.getSuffix());
+			else {
+				stream.println("\t" + type.getSuffix() + "2i");
+				stream.println("\ti2" + implementedType.getSuffix());
+			}
+
+		}
 	}
 }
