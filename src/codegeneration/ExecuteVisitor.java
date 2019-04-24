@@ -1,6 +1,5 @@
 package codegeneration;
 
-import ast.ErrorHandler;
 import ast.Program;
 import ast.Definition.Definition;
 import ast.Definition.FuncionDefinition;
@@ -13,7 +12,6 @@ import ast.statements.Print;
 import ast.statements.Return;
 import ast.statements.Statement;
 import ast.statements.WhileStatement;
-import ast.types.ErrorType;
 import ast.types.FuncionType;
 import ast.types.VoidType;
 
@@ -50,7 +48,7 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 			def.Accept(this, o);
 		}
 		for (Statement def : d.getStatements()) {
-			def.Accept(this, o);
+			def.Accept(this, d);
 		}
 
 		if (((FuncionType) d.getType()).getReturnType() instanceof VoidType) {
@@ -69,10 +67,7 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(Asigment d, Object o) {
 		super.Visit(d, o);
-		if (!d.ExpressionA.getLvalue()) {
-			new ErrorType(d.getLine(), d.getColumn(), "no se puede aplicar una asignación a esta expresion",
-					ErrorHandler.getEH());
-		}
+
 		return null;
 	}
 
@@ -119,13 +114,12 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Input d, Object o) {
-		super.Visit(d, o);
-		for (Expression def : d.getExp()) {
 
-			if (!def.getLvalue()) {
-				new ErrorType(def.getLine(), def.getColumn(), "valor no valido como input introducido",
-						ErrorHandler.getEH());
-			}
+		this.cg.comment("Read");
+		for (Expression def : d.getExp()) {
+			def.Accept(av, null);
+			this.cg.in(def.getType().getSuffix());
+			this.cg.store(def.getType().getSuffix());
 		}
 
 		return null;
@@ -133,14 +127,23 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Print d, Object o) {
-		super.Visit(d, o);
 
+		this.cg.comment("Write");
+		for (Expression def : d.getExp()) {
+			def.Accept(av, null);
+			this.cg.out(def.getType().getSuffix());
+
+		}
 		return null;
 	}
 
 	@Override
 	public Object Visit(Return d, Object o) {
-		super.Visit(d, o);
+		d.getExpression().Accept(vv, null);
+		FuncionDefinition funDefinition = (FuncionDefinition) o;
+
+		this.cg.Return(d.getExpression().getType().offsetSize(), funDefinition.getBytesLocalVariables(),
+				funDefinition.getBytesParameters());
 
 		return null;
 	}

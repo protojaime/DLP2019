@@ -37,6 +37,7 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 		for (Expression def : funcionInvocation.getExpressions()) {
 			def.Accept(this, o);
 		}
+		this.cg.call((funcionInvocation.getVariable().getName()));
 
 		return null;
 	}
@@ -52,7 +53,7 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(ArrayInvocation d, Object o) {
-		d.setLvalue(true);
+
 		super.Visit(d, o);
 
 		return null;
@@ -76,9 +77,8 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(FieldAccess d, Object o) {
-		d.setLvalue(true);
-		super.Visit(d, o);
-
+		d.Accept(av, o);
+		this.cg.load(d.getType().getSuffix());
 		return null;
 	}
 
@@ -93,21 +93,24 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(UnaryMinus d, Object o) {
-
+		String s = d.getExpression().getType().getSuffix();
+		this.cg.push(s, "0");
+		d.getExpression().Accept(this, o);
+		this.cg.getOperation("-", s);
 		return null;
 	}
 
 	@Override
 	public Object Visit(UnaryNot d, Object o) {
-		d.setLvalue(false);
-		super.Visit(d, o);
-
+		d.getExpression().Accept(this, o);
+		this.cg.getOperation("!", d.getExpression().getType().getSuffix());
 		return null;
 	}
 
 	@Override
 	public Object Visit(Variable d, Object o) {
-		super.Visit(d, o);
+		d.Accept(this.av, o);
+		this.cg.load(d.getType().getSuffix());
 		return null;
 	}
 
