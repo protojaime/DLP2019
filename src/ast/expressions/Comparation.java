@@ -4,16 +4,14 @@ import ast.types.Type;
 import semantic.Visitor;
 
 public class Comparation extends AbstractBinaryExpression implements Expression {
-	String Comparatior;
 
-	public Comparation(int row, int column, Expression A, Expression B, String comparatior) {
-		super(row, column, A, B);
-		Comparatior = comparatior;
+	public Comparation(int row, int column, Expression A, Expression B, String operator) {
+		super(row, column, A, B, operator);
+
 	}
 
-	Comparation(int row, int column, Type t, Expression A, Expression B, String comparatior) {
-		super(row, column, t, A, B);
-		Comparatior = comparatior;
+	Comparation(int row, int column, Type t, Expression A, Expression B, String operator) {
+		super(row, column, t, A, B, operator);
 	}
 
 	@Override

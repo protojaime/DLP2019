@@ -4,24 +4,15 @@ import ast.types.Type;
 import semantic.Visitor;
 
 public class Arithmetic extends AbstractBinaryExpression implements Expression {
-	String Operator;
 
 	public Arithmetic(int row, int column, Expression A, Expression B, String operator) {
-		super(row, column, A, B);
-		Operator = operator;
+		super(row, column, A, B, operator);
+
 	}
 
 	Arithmetic(int row, int column, Type t, Expression A, Expression B, String operator) {
-		super(row, column, t, A, B);
-		Operator = operator;
-	}
+		super(row, column, t, A, B, operator);
 
-	public String getOperator() {
-		return Operator;
-	}
-
-	public void setOperator(String operator) {
-		Operator = operator;
 	}
 
 	@Override

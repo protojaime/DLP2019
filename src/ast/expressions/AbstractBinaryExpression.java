@@ -5,6 +5,16 @@ import ast.types.Type;
 public abstract class AbstractBinaryExpression extends AbstractExpression implements Expression {
 	public Expression ExpressionA;
 	public Expression ExpressionB;
+	String Operator;
+
+	public String getOperator() {
+		return Operator;
+	}
+
+	public void setOperator(String operator) {
+		Operator = operator;
+	}
+
 	boolean Lvalue;
 
 	@Override
@@ -33,14 +43,17 @@ public abstract class AbstractBinaryExpression extends AbstractExpression implem
 		Lvalue = lvalue;
 	}
 
-	public AbstractBinaryExpression(int row, int column, Expression A, Expression B) {
+	public AbstractBinaryExpression(int row, int column, Expression A, Expression B, String o) {
 		super(row, column);
+		Operator = o;
 		ExpressionA = A;
 		ExpressionB = B;
 	}
 
-	public AbstractBinaryExpression(int row, int column, Type t, Expression A, Expression B) {
+	public AbstractBinaryExpression(int row, int column, Type t, Expression A, Expression B, String o) {
+
 		super(row, column, t);
+		Operator = o;
 		ExpressionA = A;
 		ExpressionB = B;
 	}
