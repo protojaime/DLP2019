@@ -29,6 +29,7 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Program d, Object o) {
+
 		this.cg.call("main");
 		this.cg.halt();
 		for (Definition def : d.definitions) {
@@ -66,8 +67,11 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(Asigment d, Object o) {
-		super.Visit(d, o);
-
+		this.cg.line(d.getLine());
+		this.cg.print("\t' * Assignment");
+		d.ExpressionA.Accept(av, o);
+		d.ExpressionB.Accept(vv, o);
+		this.cg.store(d.ExpressionA.getType().getSuffix());
 		return null;
 	}
 
@@ -130,7 +134,7 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 		this.cg.comment("Write");
 		for (Expression def : d.getExp()) {
-			def.Accept(av, null);
+			def.Accept(vv, null);
 			this.cg.out(def.getType().getSuffix());
 
 		}

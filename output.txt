@@ -1,2 +1,138 @@
+#source "input.txt"
+
 	call	main
 	halt
+#line 1
+#c:ast.types.CharType
+#line 2
+#i:ast.types.IntType
+#line 3
+#r:ast.types.DoubleType
+#line 5
+enter 0
+#line 6
+#a:ast.types.IntType
+#line 6
+#i:ast.types.IntType
+#line 8
+	' * Assignment
+	pusha	0
+	pushb	a
+	storeb
+#Write
+	pusha	0
+	loadb
+	outb
+	pushb	
+
+	outb
+#line 11
+	' * Assignment
+	push	bp
+	pushi	0
+	addi	
+	pushi	1
+	storei
+#line 12
+	' * Assignment
+	pusha	0
+	pushb	0
+	b2i
+	pushi	3
+	muli	
+	storei
+#Write
+	push	bp
+	pushi	0
+	addi	
+	loadi
+	outi
+	pushb	 
+	outb
+	pusha	0
+	loadi
+	outi
+	pushb	
+
+	outb
+#Read
+	pusha	0
+	inf
+	storef
+#Write
+	pushi	2
+	i2f
+	pusha	0
+	loadf
+	mulf	
+	outf
+	pushb	
+
+	outb
+#Write
+	pushi	3
+	i2f
+	pushf	4.5
+	subf	
+	outf
+	pushb	 
+	outb
+	pushb	0
+	b2i
+	i2f
+	pushf	48.0
+	divf	
+	outf
+	pushb	 
+	outb
+	pushb	0
+	pushb	1
+	modb	
+	outb
+	pushb	 
+	outb
+	pushb	0
+	pushb	1
+	addb	
+	outb
+	pushb	
+
+	outb
+#Write
+	pushi	1
+	pushi	2
+	gti	
+	outi
+	pushb	 
+	outb
+	pushi	4
+	pushi	3
+	lei	
+	outi
+	pushb	 
+	outb
+	pushi	5
+	pushi	5
+	eqi	
+	outi
+	pushb	 
+	outb
+	pushi	1
+	pushi	2
+	nulli	
+	outi
+	pushb	 
+	outb
+	pushi	0
+	pushi	3
+	nulli	
+	outi
+	pushb	 
+	outb
+	pushi	0
+	nulli	
+	outi
+	pushb	
+
+	outb
+	ret	0, 0, 0

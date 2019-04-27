@@ -83,7 +83,9 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 		} else if (t2 == null) {
 			d.setType(
 					new ErrorType(d.getLine(), d.getColumn(), "you cannot cast into this type", ErrorHandler.getEH()));
+			return null;
 		}
+		d.setType(d.getImplementedType());
 		return null;
 	}
 
@@ -118,6 +120,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(), "you cannot compare these two types",
 					ErrorHandler.getEH()));
 		}
+		d.setType(t);
 		return null;
 	}
 
@@ -168,8 +171,11 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 		if (t2 != null) {
 			d.setType(t2);
 		} else {
-			d.setType(new ErrorType(d.getLine(), d.getColumn(),
-					"cannot make an arithmetic operation with this expression", ErrorHandler.getEH()));
+
+			d.setType(new ErrorType(
+					d.getLine(), d.getColumn(), "cannot make an arithmetic operation with this expression ("
+							+ d.ExpressionA.getType().toString() + "," + d.ExpressionB.getType().toString() + ")",
+					ErrorHandler.getEH()));
 		}
 
 		return null;

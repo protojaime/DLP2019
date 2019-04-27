@@ -54,6 +54,7 @@ public class Main {
 		// code generation section
 		PrintStream output = new PrintStream(args[1]);
 		CodeGenerator cg = new CodeGenerator(output);
+		cg.comment("source \"" + args[0] + "\"\n");
 		// Execute visitor contains the other two visitors,
 		// all of them using the same codegenerator & output
 		ExecuteVisitor exv = new ExecuteVisitor(cg);

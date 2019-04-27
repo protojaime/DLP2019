@@ -90,6 +90,10 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
 		return 0;
 	}
 
+	public String toString() {
+		return this.getClass().getName();
+	}
+
 	@Override
 	public String getSuffix() {
 		return null;

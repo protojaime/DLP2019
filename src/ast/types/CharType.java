@@ -36,4 +36,16 @@ public class CharType extends AbstractType implements Type {
 		return "b";
 	}
 
+	@Override
+	public Type Arithmetic() {
+		return this;
+	}
+
+	@Override
+	public Type Arithmetic(Type t) {
+		if (t instanceof CharType || t instanceof ErrorType) {
+			return t;
+		}
+		return null;
+	}
 }

@@ -47,4 +47,6 @@ public interface Type extends ASTNode {
 	public Type Arithmetic();
 
 	String getSuffix();
+
+	String toString();
 }
