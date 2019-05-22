@@ -19,7 +19,6 @@ program
 	Defs.add((Definition)s);
 	}
 		}
-		
 		| f = funcionDefinition {
 	Defs.add((Definition)$f.ast);
 	}
@@ -70,8 +69,7 @@ funcionDefinition
 						)
 					)*
 				)?
-			) ')'
-			':'
+			) ')' ':'
 		)
 		| ('():')
 	) (
@@ -120,12 +118,16 @@ complexType
 
 structTypeDefinition
 	returns[StructType ast]:
-	a='struct' '{' (
+	a = 'struct' '{' (
 		{
-				ArrayList<Field> Fields = new ArrayList<Field>();
-	 	ArrayList<Integer> dimensionsStruct = new ArrayList<Integer>();
+		
+	 ArrayList<Field>FinalFields = new ArrayList <Field>();			
+	 	ArrayList<Field> Fields = new ArrayList<Field>();
 	 } (
-			newid = ID {
+			{
+			ArrayList <Integer> dimensionsStruct = new ArrayList <Integer>();
+			Fields = new ArrayList<Field>();
+			} newid = ID {
 
  Fields.add(new Field($newid.getLine(), $newid.getCharPositionInLine()+1,$newid.text));
  
@@ -171,11 +173,12 @@ Final=Front;
 for(Field a:Fields){
 a.setType(Final);
 }
-	} ';'
+	} ';' { FinalFields.addAll(Fields);}
+		
 		)* '}' {
 		StructType baseType=new StructType($a.getLine(),$a.getCharPositionInLine()+1);
 		
-for(Field a:Fields){
+for(Field a:FinalFields){
 baseType.FieldlistAdd(a);
 }
 		
@@ -308,21 +311,18 @@ statement
 	$ast= new Input($e1.start.getLine(), $e1.start.getCharPositionInLine()+1,expr);
 	} ';'
 	| ID {
-ArrayList<Expression> expr = new ArrayList<Expression>();} '(' 
-		(
-			e1 = expression {expr.add($e1.ast);} (
-				',' (eplus = expression {expr.add($eplus.ast);})
-			)*
-		)?
-	 ')' ';' {$ast = new FuncionInvocation($ID.getLine(), $ID.getCharPositionInLine()+1,expr, new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()) );
+ArrayList<Expression> expr = new ArrayList<Expression>();} '(' (
+		e1 = expression {expr.add($e1.ast);} (
+			',' (eplus = expression {expr.add($eplus.ast);})
+		)*
+	)? ')' ';' {$ast = new FuncionInvocation($ID.getLine(), $ID.getCharPositionInLine()+1,expr, new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()) );
 		}
-	|
-	 {ArrayList<Statement> TempBody = new ArrayList<Statement>();
+	| {ArrayList<Statement> TempBody = new ArrayList<Statement>();
 ArrayList<Statement> TempElseBody = new ArrayList<Statement>();
 
  } f = 'if' (e = expression ':') (
 		(
-			'{'  (
+			'{' (
 				splus = statement {
 		
 		TempBody.add($splus.ast);
@@ -357,14 +357,12 @@ ArrayList<Statement> TempElseBody = new ArrayList<Statement>();
 	)? {
 $ast= new IfStatement($f.getLine(), $f.getCharPositionInLine()+1,$e.ast,TempBody,TempElseBody  );
 		}
-	
-	
 	| {ArrayList<Statement> TempBody = new ArrayList<Statement>();
 
  } f = 'while' e = expression ':' (
 		(
 			(
-				'{'  (
+				'{' (
 					splus = statement {
 		
 		TempBody.add($splus.ast);
@@ -386,10 +384,10 @@ $ast= new WhileStatement($f.getLine(), $f.getCharPositionInLine()+1,$e.ast,TempB
 
 simpleType
 	returns[Type ast]:
-	a='int' {$ast= new IntType($a.getLine(), $a.getCharPositionInLine()+1);}
-	| a='double' {$ast= new DoubleType($a.getLine(), $a.getCharPositionInLine()+1);}
-	| a='char' {$ast= new CharType($a.getLine(), $a.getCharPositionInLine()+1);};
-	
+	a = 'int' {$ast= new IntType($a.getLine(), $a.getCharPositionInLine()+1);}
+	| a = 'double' {$ast= new DoubleType($a.getLine(), $a.getCharPositionInLine()+1);}
+	| a = 'char' {$ast= new CharType($a.getLine(), $a.getCharPositionInLine()+1);};
+
 TRASH: [ \r\n\t] -> skip;
 INT_CONSTANT: [0-9]+;
 COMMENT: '#' .*? '\r'? ('\n' | EOF) -> skip;

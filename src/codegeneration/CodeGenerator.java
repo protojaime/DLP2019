@@ -54,7 +54,7 @@ public class CodeGenerator {
 	}
 
 	public void pushbp() {
-		stream.println("\tpush\tbp");
+		stream.println("\tpusha\tbp");
 	}
 
 	public void pusha(int num) {

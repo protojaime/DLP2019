@@ -42,7 +42,7 @@ public class AddressVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(FieldAccess d, Object o) {
 		d.getExpression().Accept(this, o);
-		Field temp = ((StructType) d.getType()).getField(d.getName());
+		Field temp = ((StructType) d.getExpression().getType()).getField(d.getName());
 		this.cg.push("i", Integer.toString(temp.getType().offsetSize()));
 		this.cg.getOperation("+", "i");
 		return null;

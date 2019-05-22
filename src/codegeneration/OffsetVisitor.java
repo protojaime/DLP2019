@@ -29,11 +29,12 @@ public class OffsetVisitor extends AbstractVisitor {
 			d.setOffset(globalOffset);
 			globalOffset += d.getType().offsetSize();
 		} else {
-			if ((boolean) o) {
+			if (o instanceof Boolean && (Boolean) o) {
 				d.setOffset(parameterOffset);
 				parameterOffset += d.getType().offsetSize();
 			} else {
 				LocalOffset -= d.getType().offsetSize();
+
 				d.setOffset(LocalOffset);
 			}
 		}

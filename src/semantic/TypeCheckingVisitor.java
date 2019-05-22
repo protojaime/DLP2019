@@ -33,7 +33,6 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 		Type t = d.getExpression().getType().Dot(d.getName());
 		if (t == null) {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(), "this field doesn't exist", ErrorHandler.getEH()));
-
 		}
 		d.setType(t);
 		return null;
@@ -47,6 +46,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 			new ErrorType(d.getLine(), d.getColumn(),
 					"the types of the variable to be asigned and of the asigment expression are not compatible",
 					ErrorHandler.getEH());
+		System.out.println(d.ExpressionA.getType()+"-"+d.ExpressionB.getType());
 			return null;
 		}
 		return null;
@@ -75,6 +75,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(Cast d, Object o) {
 		super.Visit(d, o);
+
 		Type t = d.getEx().getType().canBeCast(d.getImplementedType());
 		Type t2 = d.getEx().getType().canBeCast(d.getEx().getType());
 		if (t == null) {
@@ -205,20 +206,20 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(FuncionDefinition d, Object o) {
-		super.Visit(d, ((FuncionType) d.getType()).getReturnType());
+
+		super.Visit(d, (((FuncionType) d.getType())).getReturnType());
 		return null;
 	}
 
 	@Override
 	public Object Visit(Return d, Object o) {
+		super.Visit(d, o);
 		Type t = (Type) o;
-
 		if (t instanceof VoidType) {
 			new ErrorType(d.getLine(), d.getColumn(), "void funcions do not have return statements",
 					ErrorHandler.getEH());
 			return null;
 		}
-
 		if (!t.getClass().equals(d.Expression.getType().getClass())) {
 			new ErrorType(d.getLine(), d.getColumn(),
 					"the type of the return expression is not the same as the return type of the funcion",

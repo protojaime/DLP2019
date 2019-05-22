@@ -8,6 +8,7 @@ import ast.ErrorHandler;
 import ast.Program;
 import codegeneration.CodeGenerator;
 import codegeneration.ExecuteVisitor;
+import codegeneration.OffsetVisitor;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import parser.PmmLexer;
@@ -45,21 +46,22 @@ public class Main {
 
 		if (ErrorHandler.getEH().hasErrors()) {
 			ErrorHandler.getEH().showErrors(System.out);
+		} else {
+
+			// * The AST is shown
+			IntrospectorModel model = new IntrospectorModel("Program", ast);
+			new IntrospectorTree("Introspector", model);
+
+			// code generation section
+			PrintStream output = new PrintStream(args[1]);
+			CodeGenerator cg = new CodeGenerator(output);
+			cg.comment("source \"" + args[0] + "\"\n");
+			// Execute visitor contains the other two visitors,
+			// all of them using the same codegenerator & output
+			ExecuteVisitor exv = new ExecuteVisitor(cg);
+			OffsetVisitor ov = new OffsetVisitor();
+			ast.Accept(ov, new Object());
+			ast.Accept(exv, new Object());
 		}
-
-		// * The AST is shown
-		IntrospectorModel model = new IntrospectorModel("Program", ast);
-		new IntrospectorTree("Introspector", model);
-
-		// code generation section
-		PrintStream output = new PrintStream(args[1]);
-		CodeGenerator cg = new CodeGenerator(output);
-		cg.comment("source \"" + args[0] + "\"\n");
-		// Execute visitor contains the other two visitors,
-		// all of them using the same codegenerator & output
-		ExecuteVisitor exv = new ExecuteVisitor(cg);
-
-		ast.Accept(exv, new Object());
 	}
-
 }

@@ -75,7 +75,9 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(FieldAccess d, Object o) {
+
 		d.getExpression().Accept(this, o);
+		// d.getExpression().getType().Accept(this, o);
 		return null;
 	}
 
@@ -235,6 +237,7 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(StructType d, Object o) {
+
 		for (Field def : d.getFieldlist()) {
 			def.Accept(this, o);
 		}

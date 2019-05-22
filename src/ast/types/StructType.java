@@ -45,8 +45,10 @@ public class StructType extends AbstractType {
 
 	@Override
 	public Type Dot(String s) {
-		if (this.getFieldlist().contains(new Field(0, 0, s)))
-			return this;
+		int i = this.getFieldlist().indexOf(new Field(0, 0, s));
+		if (i != -1) {
+			return this.getFieldlist().get(i).type;
+		}
 		return null;
 	}
 

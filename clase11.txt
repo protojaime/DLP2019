@@ -1,0 +1,14 @@
+cuando funcinv es una sentencia se hace la plantilla de execute, siendo la invocacin in statement
+cuando yo invoque una funcion y nadie lo coja hay que borrar los datos en la pila
+si el valor es distinto de void haz un pop
+
+for (exp e: exp3*){
+value[[e]]()
+<call> expl Name
+Execute[[inv stm->exp1 exp2]]()
+Value[[(Expression STM]]()
+IF(!((expression) stm).Type instance of voidtype)){
+<pop> STM.Type.suffix()
+}
+
+}

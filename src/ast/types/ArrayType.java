@@ -19,6 +19,11 @@ public class ArrayType extends AbstractType implements Type {
 		this.type = type;
 	}
 
+	@Override
+	public int offsetSize() {
+		return type.offsetSize() * size;
+	}
+
 	public ArrayType(int row, int column, int size, Type type) {
 		super(row, column);
 		this.size = size;
