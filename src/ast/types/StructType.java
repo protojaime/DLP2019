@@ -39,6 +39,15 @@ public class StructType extends AbstractType {
 	}
 
 	@Override
+	public int offsetSize() {
+		int of = 0;
+		for (Field f : this.Fieldlist) {
+			of += f.getType().offsetSize();
+		}
+		return of;
+	}
+
+	@Override
 	public Object Accept(Visitor v, Object o) {
 		return v.Visit(this, o);
 	}
@@ -54,6 +63,15 @@ public class StructType extends AbstractType {
 
 	public void setFieldlist(ArrayList<Field> fieldlist) {
 		Fieldlist = fieldlist;
+	}
+
+	public int getFieldOffset(String name) {
+		int position = this.Fieldlist.indexOf(new Field(0, 0, name));
+		int offset = 0;
+		for (int i = 0; i < position; i++) {
+			offset += this.Fieldlist.get(i).getType().offsetSize();
+		}
+		return offset;
 	}
 
 }

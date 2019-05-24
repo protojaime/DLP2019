@@ -4,7 +4,6 @@ import ast.Definition.VarDefinition;
 import ast.expressions.ArrayInvocation;
 import ast.expressions.FieldAccess;
 import ast.expressions.Variable;
-import ast.types.Field;
 import ast.types.StructType;
 
 public class AddressVisitor extends abstractCodeGeneratorVisitor {
@@ -42,8 +41,8 @@ public class AddressVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(FieldAccess d, Object o) {
 		d.getExpression().Accept(this, o);
-		Field temp = ((StructType) d.getExpression().getType()).getField(d.getName());
-		this.cg.push("i", Integer.toString(temp.getType().offsetSize()));
+		int offsetField = ((StructType) d.getExpression().getType()).getFieldOffset(d.getName());
+		this.cg.push("i", Integer.toString(offsetField));
 		this.cg.getOperation("+", "i");
 		return null;
 	}

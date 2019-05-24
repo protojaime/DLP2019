@@ -15,7 +15,7 @@ public class OffsetVisitor extends AbstractVisitor {
 	public Object Visit(FuncionDefinition d, Object o) {
 		super.Visit(d, o);
 		d.setBytesLocalVariables(LocalOffset);
-		d.setBytesParameters(parameterOffset);
+		d.setBytesParameters(parameterOffset - 4);
 
 		LocalOffset = 0;
 		parameterOffset = 4;
@@ -34,7 +34,6 @@ public class OffsetVisitor extends AbstractVisitor {
 				parameterOffset += d.getType().offsetSize();
 			} else {
 				LocalOffset -= d.getType().offsetSize();
-
 				d.setOffset(LocalOffset);
 			}
 		}

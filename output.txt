@@ -3,14 +3,14 @@
 	call	main
 	halt
 	' * ast.types.StructType pair (offset 0)
-	' * ast.types.ArrayType acme (offset 0)
-	' * ast.types.ArrayType fibonacci (offset 0)
-p:
+	' * ast.types.ArrayType acme (offset 3)
+	' * ast.types.ArrayType fibonacci (offset 11)
 #line 14
+ p:
 	' * Parameters
-	ret	0, 0, 4
-f:
+	ret	0, 0, 0
 #line 16
+ f:
 	' * Parameters
 	' * ast.types.DoubleType r (offset 6)
 	' * ast.types.IntType e (offset 4)
@@ -38,14 +38,14 @@ enter 7
 	addi	
 	pushb	48
 	storeb
-#If statement:
+	' * If statement
 	pusha	bp
 	pushi	4
 	addi	
 	loadi
 	pushi	256
-	gti	
-	jz	else0:
+	lti	
+	jz	elseBody0
 #line 23
 	' * Assignment
 	pusha	bp
@@ -68,9 +68,9 @@ enter 7
 	loadb
 	b2i
 	storei
-	jmp	end1:
-else0::
-#else body:
+	jmp	endIf1
+ elseBody0:
+	' * else body
 #line 27
 	' * Assignment
 	pusha	bp
@@ -82,21 +82,21 @@ else0::
 	loadf
 	f2i
 	storei
-end1::
+ endIf1:
 	pusha	bp
 	pushi	-7
 	addi	
 	loadi
-	ret	2, 7, 10
-initialize:
+	ret	2, 7, 6
 #line 31
+ initialize:
 	' * Parameters
 	' * Local variables
 enter 2
 	' * ast.types.IntType i (offset -2)
 #line 33
 	' * Assignment
-	pusha	0
+	pusha	11
 	pushi	0
 	pushi	6
 	muli	
@@ -109,7 +109,7 @@ enter 2
 	storei
 #line 34
 	' * Assignment
-	pusha	0
+	pusha	11
 	pushi	0
 	pushi	6
 	muli	
@@ -122,7 +122,7 @@ enter 2
 	storei
 #line 35
 	' * Assignment
-	pusha	0
+	pusha	11
 	pushi	0
 	pushi	6
 	muli	
@@ -140,18 +140,18 @@ enter 2
 	addi	
 	pushi	1
 	storei
-#While statement:
-start2::
+	' * While statement
+ startWhile2:
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
 	pushi	8
-	gti	
-	jz	end3:
+	lti	
+	jz	startWhile3
 #line 38
 	' * Assignment
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -163,7 +163,7 @@ start2::
 	pushi	2
 	muli	
 	addi	
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -181,7 +181,7 @@ start2::
 	storei
 #line 39
 	' * Assignment
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -193,7 +193,7 @@ start2::
 	pushi	2
 	muli	
 	addi	
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -211,7 +211,7 @@ start2::
 	storei
 #line 40
 	' * Assignment
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -223,7 +223,7 @@ start2::
 	pushi	2
 	muli	
 	addi	
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -236,7 +236,7 @@ start2::
 	muli	
 	addi	
 	loadi
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -263,11 +263,11 @@ start2::
 	pushi	1
 	addi	
 	storei
-	jmp	start2:
-end3::
-	ret	0, 2, 4
-main:
+	jmp	startWhile2
+ startWhile3:
+	ret	0, 2, 0
 #line 47
+ main:
 	' * Parameters
 	' * Local variables
 enter 4
@@ -284,14 +284,14 @@ enter 4
 #line 51
 	' * Assignment
 	pusha	0
-	pushi	1
+	pushi	2
 	addi	
 	pushb	48
 	storeb
 #line 52
 	' * Assignment
 	pusha	0
-	pushi	2
+	pushi	0
 	addi	
 	pushb	48
 	b2i
@@ -303,7 +303,7 @@ enter 4
 	loadi
 	i2f
 	pusha	0
-	pushi	1
+	pushi	2
 	addi	
 	loadb
 	b2i
@@ -323,15 +323,15 @@ enter 4
 	addi	
 	pushi	0
 	storei
-#While statement:
-start4::
+	' * While statement
+ startWhile4:
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
 	pushi	8
-	gti	
-	jz	end5:
+	lti	
+	jz	startWhile5
 	' * Write
 	pushb	40
 	outb
@@ -344,7 +344,7 @@ start4::
 	outi
 	pushb	41
 	outb
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -360,7 +360,7 @@ start4::
 	outi
 	pushb	43
 	outb
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -376,7 +376,7 @@ start4::
 	outi
 	pushb	61
 	outb
-	pusha	0
+	pusha	11
 	pusha	bp
 	pushi	-2
 	addi	
@@ -404,38 +404,38 @@ start4::
 	pushi	1
 	addi	
 	storei
-	jmp	start4:
-end5::
+	jmp	startWhile4
+ startWhile5:
 #line 68
 	' * Assignment
-	pusha	0
+	pusha	3
 	pushi	1
-	pushi	0
+	pushi	4
 	muli	
 	addi	
 	pushi	0
 	addi	
 	pushi	1
-	pushi	0
-	muli	
-	addi	
 	pushi	2
+	muli	
+	addi	
+	pushi	0
 	addi	
 	pushi	56
 	storei
 	' * Write
-	pusha	0
+	pusha	3
 	pushi	1
-	pushi	0
+	pushi	4
 	muli	
 	addi	
 	pushi	0
 	addi	
 	pushi	1
-	pushi	0
-	muli	
-	addi	
 	pushi	2
+	muli	
+	addi	
+	pushi	0
 	addi	
 	loadi
 	outi
@@ -448,15 +448,15 @@ end5::
 	addi	
 	pushi	0
 	storei
-#While statement:
-start6::
+	' * While statement
+ startWhile6:
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
 	pushi	2
-	gti	
-	jz	end7:
+	lti	
+	jz	startWhile7
 #line 73
 	' * Assignment
 	pusha	bp
@@ -464,23 +464,23 @@ start6::
 	addi	
 	pushi	0
 	storei
-#While statement:
-start8::
+	' * While statement
+ startWhile8:
 	pusha	bp
 	pushi	-4
 	addi	
 	loadi
 	pushi	2
-	gti	
-	jz	end9:
+	lti	
+	jz	startWhile9
 #line 75
 	' * Assignment
-	pusha	0
+	pusha	3
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
-	pushi	0
+	pushi	4
 	muli	
 	addi	
 	pushi	0
@@ -489,10 +489,10 @@ start8::
 	pushi	-4
 	addi	
 	loadi
-	pushi	0
+	pushi	2
 	muli	
 	addi	
-	pushi	2
+	pushi	0
 	addi	
 	pusha	bp
 	pushi	-2
@@ -516,8 +516,8 @@ start8::
 	pushi	1
 	addi	
 	storei
-	jmp	start8:
-end9::
+	jmp	startWhile8
+ startWhile9:
 #line 78
 	' * Assignment
 	pusha	bp
@@ -530,8 +530,8 @@ end9::
 	pushi	1
 	addi	
 	storei
-	jmp	start6:
-end7::
+	jmp	startWhile6
+ startWhile7:
 #line 81
 	' * Assignment
 	pusha	bp
@@ -539,15 +539,15 @@ end7::
 	addi	
 	pushi	0
 	storei
-#While statement:
-start10::
+	' * While statement
+ startWhile10:
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
 	pushi	2
-	gti	
-	jz	end11:
+	lti	
+	jz	startWhile11
 #line 83
 	' * Assignment
 	pusha	bp
@@ -555,22 +555,22 @@ start10::
 	addi	
 	pushi	0
 	storei
-#While statement:
-start12::
+	' * While statement
+ startWhile12:
 	pusha	bp
 	pushi	-4
 	addi	
 	loadi
 	pushi	2
-	gti	
-	jz	end13:
+	lti	
+	jz	startWhile13
 	' * Write
-	pusha	0
+	pusha	3
 	pusha	bp
 	pushi	-2
 	addi	
 	loadi
-	pushi	0
+	pushi	4
 	muli	
 	addi	
 	pushi	0
@@ -579,10 +579,10 @@ start12::
 	pushi	-4
 	addi	
 	loadi
-	pushi	0
+	pushi	2
 	muli	
 	addi	
-	pushi	2
+	pushi	0
 	addi	
 	loadi
 	outi
@@ -600,8 +600,8 @@ start12::
 	pushi	1
 	addi	
 	storei
-	jmp	start12:
-end13::
+	jmp	startWhile12
+ startWhile13:
 #line 89
 	' * Assignment
 	pusha	bp
@@ -614,6 +614,6 @@ end13::
 	pushi	1
 	addi	
 	storei
-	jmp	start10:
-end11::
-	ret	0, 4, 4
+	jmp	startWhile10
+ startWhile11:
+	ret	0, 4, 0
