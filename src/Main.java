@@ -9,6 +9,8 @@ import ast.Program;
 import codegeneration.CodeGenerator;
 import codegeneration.ExecuteVisitor;
 import codegeneration.OffsetVisitor;
+import introspector.model.IntrospectorModel;
+import introspector.view.IntrospectorTree;
 import parser.PmmLexer;
 import parser.PmmParser;
 import semantic.EvalVisitor;
@@ -47,8 +49,8 @@ public class Main {
 		} else {
 
 			// * The AST is shown
-			// IntrospectorModel model = new IntrospectorModel("Program", ast);
-			// new IntrospectorTree("Introspector", model);
+			IntrospectorModel model = new IntrospectorModel("Program", ast);
+			new IntrospectorTree("Introspector", model);
 
 			// code generation section
 			PrintStream output = new PrintStream(args[1]);
