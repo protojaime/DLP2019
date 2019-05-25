@@ -151,4 +151,9 @@ public class CodeGenerator {
 
 		}
 	}
+
+	public void close() {
+		stream.close();
+
+	}
 }
