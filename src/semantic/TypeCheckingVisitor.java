@@ -41,12 +41,12 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(Asigment d, Object o) {
 		super.Visit(d, o);
-		Type t = d.ExpressionA.getType().promotesTo(d.ExpressionB.getType());
+		Type t = d.getExpressionA().getType().promotesTo(d.getExpressionB().getType());
 		if (t == null) {
 			new ErrorType(d.getLine(), d.getColumn(),
 					"the types of the variable to be asigned and of the asigment expression are not compatible",
 					ErrorHandler.getEH());
-		System.out.println(d.ExpressionA.getType()+"-"+d.ExpressionB.getType());
+			System.out.println(d.getExpressionA().getType() + "-" + d.getExpressionB().getType());
 			return null;
 		}
 		return null;
@@ -93,13 +93,13 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(ArrayInvocation d, Object o) {
 		super.Visit(d, o);
-		if (!(d.ExpressionA.getType() instanceof ArrayType)) {
+		if (!(d.getExpressionA().getType() instanceof ArrayType)) {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(),
 					"the array dimension of the variable you tried to access does not exist", ErrorHandler.getEH()));
 			return null;
 		} else {
 
-			Type t = d.ExpressionA.getType().SquareBraquets(d.ExpressionB.getType());
+			Type t = d.getExpressionA().getType().SquareBraquets(d.getExpressionB().getType());
 			if (t == null) {
 				ErrorType e = new ErrorType(d.getLine(), d.getColumn(),
 						"the type of the expression introduced in the brackets is not Integer", ErrorHandler.getEH());
@@ -116,7 +116,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	public Object Visit(Comparation d, Object o) {
 		super.Visit(d, o);
 
-		Type t = d.ExpressionA.getType().Comparation(d.ExpressionB.getType());
+		Type t = d.getExpressionA().getType().Comparation(d.getExpressionB().getType());
 		if (t == null) {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(), "you cannot compare these two types",
 					ErrorHandler.getEH()));
@@ -128,7 +128,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(Logical d, Object o) {
 		super.Visit(d, o);
-		Type t = d.ExpressionA.getType().Logical(d.ExpressionB.getType());
+		Type t = d.getExpressionA().getType().Logical(d.getExpressionB().getType());
 		if (t == null) {
 			d.setType(new ErrorType(d.getLine(), d.getColumn(),
 					"you cannot have a logical operation between these two expressions", ErrorHandler.getEH()));
@@ -167,15 +167,16 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(Arithmetic d, Object o) {
 		super.Visit(d, o);
-		Type t = d.ExpressionA.getType().Arithmetic();
-		Type t2 = d.ExpressionB.getType().Arithmetic(t);
+		Type t = d.getExpressionA().getType().Arithmetic();
+		Type t2 = d.getExpressionB().getType().Arithmetic(t);
 		if (t2 != null) {
 			d.setType(t2);
 		} else {
 
-			d.setType(new ErrorType(
-					d.getLine(), d.getColumn(), "cannot make an arithmetic operation with this expression ("
-							+ d.ExpressionA.getType().toString() + "," + d.ExpressionB.getType().toString() + ")",
+			d.setType(new ErrorType(d.getLine(), d.getColumn(),
+					"cannot make an arithmetic operation with this expression ("
+							+ d.getExpressionA().getType().toString() + "," + d.getExpressionB().getType().toString()
+							+ ")",
 					ErrorHandler.getEH()));
 		}
 

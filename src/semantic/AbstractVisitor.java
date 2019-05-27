@@ -47,15 +47,15 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(Arithmetic d, Object o) {
-		d.ExpressionA.Accept(this, o);
-		d.ExpressionB.Accept(this, o);
+		d.getExpressionA().Accept(this, o);
+		d.getExpressionB().Accept(this, o);
 		return null;
 	}
 
 	@Override
 	public Object Visit(ArrayInvocation d, Object o) {
-		d.ExpressionA.Accept(this, o);
-		d.ExpressionB.Accept(this, o);
+		d.getExpressionA().Accept(this, o);
+		d.getExpressionB().Accept(this, o);
 		return null;
 	}
 
@@ -68,8 +68,8 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(Comparation d, Object o) {
-		d.ExpressionA.Accept(this, o);
-		d.ExpressionB.Accept(this, o);
+		d.getExpressionA().Accept(this, o);
+		d.getExpressionB().Accept(this, o);
 		return null;
 	}
 
@@ -83,8 +83,8 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(Logical d, Object o) {
-		d.ExpressionA.Accept(this, o);
-		d.ExpressionB.Accept(this, o);
+		d.getExpressionA().Accept(this, o);
+		d.getExpressionB().Accept(this, o);
 		return null;
 	}
 
@@ -142,8 +142,8 @@ public abstract class AbstractVisitor implements Visitor {
 
 	@Override
 	public Object Visit(Asigment d, Object o) {
-		d.ExpressionA.Accept(this, o);
-		d.ExpressionB.Accept(this, o);
+		d.getExpressionA().Accept(this, o);
+		d.getExpressionB().Accept(this, o);
 		return null;
 	}
 
