@@ -2,6 +2,7 @@
 package codegeneration;
 
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Program;
 import ast.Definition.FuncionDefinition;
 import ast.Definition.VarDefinition;
@@ -39,6 +40,12 @@ public abstract class abstractCodeGeneratorVisitor implements Visitor {
 
 	abstractCodeGeneratorVisitor(CodeGenerator c) {
 		cg = c;
+	}
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		throw new IllegalStateException("code generation template " + d.getClass().getName());
+
 	}
 
 	@Override

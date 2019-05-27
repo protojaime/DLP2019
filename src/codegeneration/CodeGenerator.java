@@ -156,4 +156,8 @@ public class CodeGenerator {
 		stream.close();
 
 	}
+
+	public void push(String suffix, int value) {
+		stream.println("\tpush" + suffix + "\t" + value);
+	}
 }

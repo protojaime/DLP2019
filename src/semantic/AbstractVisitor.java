@@ -1,6 +1,7 @@
 package semantic;
 
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Program;
 import ast.Definition.Definition;
 import ast.Definition.FuncionDefinition;
@@ -36,6 +37,12 @@ import ast.types.StructType;
 import ast.types.VoidType;
 
 public abstract class AbstractVisitor implements Visitor {
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		d.getVariable().Accept(this, o);
+		return null;
+	}
 
 	@Override
 	public Object Visit(Program d, Object o) {

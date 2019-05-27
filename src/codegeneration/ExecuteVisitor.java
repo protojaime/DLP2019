@@ -1,6 +1,7 @@
 package codegeneration;
 
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Program;
 import ast.Definition.Definition;
 import ast.Definition.FuncionDefinition;
@@ -151,6 +152,16 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 		this.cg.Return(d.getExpression().getType().offsetSize(), Math.abs(funDefinition.getBytesLocalVariables()),
 				funDefinition.getBytesParameters());
 
+		return null;
+	}
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		d.getVariable().Accept(vv, o);
+		this.cg.push(d.getType().getSuffix(), 1);
+		this.cg.getOperation(d.getSymbol(), d.getType().getSuffix());
+		d.getVariable().Accept(av, o);
+		this.cg.store(d.getType().getSuffix());
 		return null;
 	}
 

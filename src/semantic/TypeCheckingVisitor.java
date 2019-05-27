@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.ErrorHandler;
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Definition.FuncionDefinition;
 import ast.expressions.Arithmetic;
 import ast.expressions.ArrayInvocation;
@@ -46,7 +47,7 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 			new ErrorType(d.getLine(), d.getColumn(),
 					"the types of the variable to be asigned and of the asigment expression are not compatible",
 					ErrorHandler.getEH());
-		System.out.println(d.ExpressionA.getType()+"-"+d.ExpressionB.getType());
+			System.out.println(d.ExpressionA.getType() + "-" + d.ExpressionB.getType());
 			return null;
 		}
 		return null;
@@ -201,6 +202,20 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 			return null;
 		}
 		d.setType(t2);
+		return null;
+	}
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		super.Visit(d, o);
+		super.Visit(d, o);
+		Type t = d.getVariable().getType().Arithmetic();
+		if (t == null) {
+			d.setType(new ErrorType(d.getLine(), d.getColumn(),
+					"cannot apply this operant to a non arithmetic expression", ErrorHandler.getEH()));
+			return null;
+		}
+		d.setType(t);
 		return null;
 	}
 

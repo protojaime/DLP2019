@@ -1,6 +1,7 @@
 package semantic;
 
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Program;
 import ast.Definition.FuncionDefinition;
 import ast.Definition.VarDefinition;
@@ -37,6 +38,8 @@ public interface Visitor {
 	Object Visit(Arithmetic d, Object o);
 
 	Object Visit(ArrayInvocation d, Object o);
+
+	Object Visit(OneDigitMod d, Object o);
 
 	Object Visit(Cast d, Object o);
 

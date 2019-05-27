@@ -1,6 +1,7 @@
 package codegeneration;
 
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.expressions.Arithmetic;
 import ast.expressions.ArrayInvocation;
 import ast.expressions.Cast;
@@ -35,6 +36,15 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 	public Object Visit(ArrayInvocation d, Object o) {
 		d.Accept(av, o);
 		this.cg.load(d.getType().getSuffix());
+		return null;
+	}
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		d.getVariable().Accept(this.av, o);
+		this.cg.load(d.getType().getSuffix());
+		this.cg.push(d.getType().getSuffix(), 1);
+		this.cg.getOperation(d.getSymbol(), d.getType().getSuffix());
 		return null;
 	}
 
@@ -115,7 +125,7 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(ConstantChar d, Object o) {
-		this.cg.push("b", Integer.toString((int)(d.getValue().toCharArray()[0])));
+		this.cg.push("b", Integer.toString((int) (d.getValue().toCharArray()[0])));
 		return null;
 	}
 

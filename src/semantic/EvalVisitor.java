@@ -2,6 +2,7 @@ package semantic;
 
 import ast.ErrorHandler;
 import ast.FuncionInvocation;
+import ast.OneDigitMod;
 import ast.Program;
 import ast.Definition.FuncionDefinition;
 import ast.Definition.VarDefinition;
@@ -47,6 +48,13 @@ public class EvalVisitor extends AbstractVisitor implements Visitor {
 	@Override
 	public Object Visit(ArrayInvocation d, Object o) {
 		d.setLvalue(true);
+		super.Visit(d, o);
+		return null;
+	}
+
+	@Override
+	public Object Visit(OneDigitMod d, Object o) {
+		d.setLvalue(false);
 		super.Visit(d, o);
 		return null;
 	}
