@@ -42,105 +42,130 @@ public class CodeGenerator {
 	}
 
 	public void getLogicOperation(String OP) {
+		stream.flush();
 		stream.println("\t" + LogicOperations.get(OP) + "\t");
 	}
 
 	public void getOperation(String OP, String suffix) {
+		stream.flush();
 		stream.println("\t" + Operations.get(OP) + suffix + "\t");
 	}
 
 	public void getOperation(String OP) {
+		stream.flush();
 		stream.println("\t" + Operations.get(OP) + "\t");
 	}
 
 	public void pushbp() {
+		stream.flush();
 		stream.println("\tpusha\tbp");
 	}
 
 	public void pusha(int num) {
+		stream.flush();
 		stream.println("\tpusha\t" + num);
 	}
 
 	public void push(String suffix, String value) {
+		stream.flush();
 		stream.println("\tpush" + suffix + "\t" + value);
 	}
 
 	public void pop(String suffix) {
+		stream.flush();
 		stream.println("\tpop" + suffix);
 	}
 
 	public void call(String name) {
+		stream.flush();
 		stream.println("\tcall\t" + name);
 	}
 
 	public void add() {
+		stream.flush();
 		stream.println("\tadd");
 	}
 
 	public void store(String suffix) {
+		stream.flush();
 		stream.println("\tstore" + suffix);
 	}
 
 	public void load(String suffix) {
+		stream.flush();
 		stream.println("\tload" + suffix);
 	}
 
 	public void dup(String suffix) {
+		stream.flush();
 		stream.println("\tdup" + suffix);
 	}
 
 	public void jumpIfZero(String label) {
+		stream.flush();
 		stream.println("\tjz\t" + label);
 	}
 
 	public void jumpIfNoZero(String label) {
+		stream.flush();
 		stream.println("\tjnz\t" + label);
 	}
 
 	public void jump(String label) {
+		stream.flush();
 		stream.println("\tjmp\t" + label);
 	}
 
 	public void out(String suffix) {
+		stream.flush();
 		stream.println("\tout" + suffix);
 	}
 
 	public void in(String suffix) {
+		stream.flush();
 		stream.println("\tin" + suffix);
 	}
 
 	public void halt() {
+		stream.flush();
 		stream.println("\thalt");
 
 	}
 
 	public void label(String name) {
+		stream.flush();
 		stream.println(" " + name + ":");
 	}
 
 	public void comment(String c) {
+		stream.flush();
 		stream.println("#" + c);
 	}
 
 	public void line(int line) {
+		stream.flush();
 		this.comment("line " + line);
 	}
 
 	public void enter(int bytesParameters) {
+		stream.flush();
 		stream.println("enter " + bytesParameters);
 
 	}
 
 	public void Return(int i, int j, int k) {
+		stream.flush();
 		stream.println("\tret\t" + i + ", " + j + ", " + k);
 
 	}
 
 	public void print(String text) {
+		stream.flush();
 		stream.println(text);
 	}
 
 	public void convert(Type type, Type implementedType) {
+		stream.flush();
 		if (!type.equals(implementedType)) {
 			if (type.getSuffix().equals("i") || implementedType.getSuffix().equals("i"))
 				stream.println("\t" + type.getSuffix() + "2" + implementedType.getSuffix());

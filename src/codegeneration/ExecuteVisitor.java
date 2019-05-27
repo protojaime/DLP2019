@@ -134,8 +134,8 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(Print d, Object o) {
 
-		this.cg.print("\t' * Write");
 		for (Expression def : d.getExp()) {
+			this.cg.print("\t' * Write");
 			def.Accept(vv, o);
 			this.cg.out(def.getType().getSuffix());
 
