@@ -174,7 +174,6 @@ for(Field a:Fields){
 a.setType(Final);
 }
 	} ';' { FinalFields.addAll(Fields);}
-		
 		)* '}' {
 		StructType baseType=new StructType($a.getLine(),$a.getCharPositionInLine()+1);
 		
@@ -255,9 +254,9 @@ ArrayList<Expression> expr = new ArrayList<Expression>();} '(' (
 	| '(' expression ')' { $ast =$expression.ast;}
 	| e1 = expression '[' e2 = expression ']' {$ast = new ArrayInvocation($e1.start.getLine(), $e1.start.getCharPositionInLine()+1,$e1.ast, $e2.ast );
 		}
-	|  ID '++'  {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "+" );
+	| ID '++' {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "+" );
 		}
-	|  ID '--'  {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "-" );
+	| ID '--' {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "-" );
 		}
 	| e1 = expression '.' ID {$ast = new FieldAccess($e1.ast.getLine(), $e1.ast.getColumn(),$e1.ast, $ID.text);
 	}
@@ -286,7 +285,11 @@ ArrayList<Expression> expr = new ArrayList<Expression>();} '(' (
 
 statement
 	returns[Statement ast]:
-	e1 = expression '=' e2 = expression ';' {$ast = new Asigment($e1.start.getLine(), $e1.start.getCharPositionInLine()+1,$e1.ast, $e2.ast );
+	
+	e1 = expression '=' e2 = expression ';' {$ast = new Asigment($e1.start.getLine(), $e1.start.getCharPositionInLine()+1,$e1.ast, $e2.ast);
+		}
+	|
+	e1 = expression o = ('+' | '-' | '/' | '*' | '%') '=' e2 = expression ';' {$ast = new Asigment($e1.start.getLine(), $e1.start.getCharPositionInLine()+1,$e1.ast, $e2.ast,$o.text );
 		}
 	| 'print' {
 	
@@ -321,9 +324,9 @@ ArrayList<Expression> expr = new ArrayList<Expression>();} '(' (
 		)*
 	)? ')' ';' {$ast = new FuncionInvocation($ID.getLine(), $ID.getCharPositionInLine()+1,expr, new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()) );
 		}
-	|  ID '++'  ';'{$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "+" );
+	| ID '++' ';' {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "+" );
 		}
-	|  ID '--'  ';'{$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "-" );
+	| ID '--' ';' {$ast = new OneDigitMod($ID.getLine(), $ID.getCharPositionInLine()+1,new Variable($ID.getLine(), $ID.getCharPositionInLine()+1,$ID.getText()), "-" );
 		}
 	| {ArrayList<Statement> TempBody = new ArrayList<Statement>();
 ArrayList<Statement> TempElseBody = new ArrayList<Statement>();
