@@ -65,6 +65,11 @@ public class StructType extends AbstractType {
 		Fieldlist = fieldlist;
 	}
 
+	@Override
+	public String toString() {
+		return "StructType [Fields {" + Fieldlist + "}]";
+	}
+
 	public int getFieldOffset(String name) {
 		int position = this.Fieldlist.indexOf(new Field(0, 0, name));
 		int offset = 0;

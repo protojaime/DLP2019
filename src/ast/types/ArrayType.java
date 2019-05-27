@@ -48,6 +48,11 @@ public class ArrayType extends AbstractType implements Type {
 	}
 
 	@Override
+	public String toString() {
+		return "ArrayType [size=" + size + ", type=" + type + "]";
+	}
+
+	@Override
 	public Object Accept(Visitor v, Object o) {
 		return v.Visit(this, o);
 	}

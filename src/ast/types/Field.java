@@ -4,6 +4,11 @@ import ast.AbstractASTNode;
 import semantic.Visitor;
 
 public class Field extends AbstractASTNode {
+	@Override
+	public String toString() {
+		return "Field [Name=" + Name + ", type=" + type + "]";
+	}
+
 	String Name;
 	Type type;
 

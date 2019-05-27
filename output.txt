@@ -2,9 +2,9 @@
 
 	call	main
 	halt
-	' * ast.types.StructType pair (offset 0)
-	' * ast.types.ArrayType acme (offset 3)
-	' * ast.types.ArrayType fibonacci (offset 11)
+	' * StructType [Fields {[Field [Name=integer, type=ast.types.IntType], Field [Name=character, type=ast.types.CharType]]}] pair (offset 0)
+	' * ArrayType [size=2, type=StructType [Fields {[Field [Name=employees, type=ArrayType [size=2, type=StructType [Fields {[Field [Name=age, type=ast.types.IntType]]}]]]]}]] acme (offset 3)
+	' * ArrayType [size=8, type=ArrayType [size=3, type=ast.types.IntType]] fibonacci (offset 11)
 #line 14
  p:
 	' * Parameters

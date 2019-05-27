@@ -63,7 +63,7 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 	@Override
 	public Object Visit(VarDefinition d, Object o) {
-		this.cg.print("\t' * " + d.getType() + " " + d.getName() + " (offset " + d.getOffset() + ")");
+		this.cg.print("\t' * " + d.getType().toString() + " " + d.getName() + " (offset " + d.getOffset() + ")");
 		return null;
 	}
 
