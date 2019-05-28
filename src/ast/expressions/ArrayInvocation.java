@@ -14,7 +14,7 @@ public class ArrayInvocation extends AbstractExpression implements Expression {
 
 	}
 
-	ArrayInvocation(int row, int column, Type t, Expression A, Expression B) {
+	public ArrayInvocation(int row, int column, Type t, Expression A, Expression B) {
 		super(row, column, t);
 		ExpressionA = A;
 		ExpressionB = B;

@@ -34,6 +34,13 @@ public class ArrayType extends AbstractType implements Type {
 		return size;
 	}
 
+	public Type getBaseType() {
+		if (this.type instanceof ArrayType)
+			return ((ArrayType) this.type).getBaseType();
+		else
+			return this.type;
+	}
+
 	public void setSize(int size) {
 		this.size = size;
 	}

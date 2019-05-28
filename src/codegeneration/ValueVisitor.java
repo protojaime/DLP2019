@@ -14,6 +14,7 @@ import ast.expressions.Logical;
 import ast.expressions.UnaryMinus;
 import ast.expressions.UnaryNot;
 import ast.expressions.Variable;
+import ast.types.ArrayType;
 
 public class ValueVisitor extends abstractCodeGeneratorVisitor {
 
@@ -109,7 +110,15 @@ public class ValueVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(Variable d, Object o) {
 		d.Accept(this.av, o);
-		this.cg.load(d.getType().getSuffix());
+		if (d.getType() instanceof ArrayType) {
+			for (int i = 0; i < ((ArrayType) d.getType()).getSize(); i++) {
+				// teoricamente se podrian imprimir arrays de otras cosas si cambias
+				// TypeCheckingV
+				this.cg.load(((ArrayType) d.getType()).getType().getSuffix());
+			}
+
+		} else
+			this.cg.load(d.getType().getSuffix());
 		return null;
 	}
 

@@ -5,6 +5,8 @@ import ast.Program;
 import ast.Definition.Definition;
 import ast.Definition.FuncionDefinition;
 import ast.Definition.VarDefinition;
+import ast.expressions.ArrayInvocation;
+import ast.expressions.ConstantInt;
 import ast.expressions.Expression;
 import ast.statements.Asigment;
 import ast.statements.IfStatement;
@@ -13,6 +15,7 @@ import ast.statements.Print;
 import ast.statements.Return;
 import ast.statements.Statement;
 import ast.statements.WhileStatement;
+import ast.types.ArrayType;
 import ast.types.FuncionType;
 import ast.types.VoidType;
 
@@ -71,9 +74,33 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 	public Object Visit(Asigment d, Object o) {
 		this.cg.line(d.getLine());
 		this.cg.print("\t' * Assignment");
-		d.ExpressionA.Accept(av, o);
-		d.ExpressionB.Accept(vv, o);
-		this.cg.store(d.ExpressionA.getType().getSuffix());
+//arrays
+		if (d.getExpressionA().getType() instanceof ArrayType) {
+			ArrayType ar = ((ArrayType) d.getExpressionA().getType());
+			ArrayType ar2 = ((ArrayType) d.getExpressionB().getType());
+			int i = 0;
+			for (; i < (ar).getSize(); i++) {
+
+				// hacemos una version falsa de ArrayInvocation
+				ArrayInvocation dummyar1 = new ArrayInvocation(d.getExpressionA().getLine(),
+						d.getExpressionA().getColumn(), ar.getType(), d.getExpressionA(),
+						new ConstantInt(d.getExpressionA().getLine(), d.getExpressionA().getColumn(), i));
+				ArrayInvocation dummyar2 = new ArrayInvocation(d.getExpressionB().getLine(),
+						d.getExpressionB().getColumn(), ar2.getType(), d.getExpressionB(),
+						new ConstantInt(d.getExpressionB().getLine(), d.getExpressionB().getColumn(), i));
+				// el resto es igual que el normal
+				dummyar1.Accept(av, o);
+				dummyar2.Accept(vv, o);
+				this.cg.store(dummyar1.getType().getSuffix());
+			}
+
+		}
+//normal
+		else {
+			d.ExpressionA.Accept(av, o);
+			d.ExpressionB.Accept(vv, o);
+			this.cg.store(d.ExpressionA.getType().getSuffix());
+		}
 		return null;
 	}
 
@@ -121,7 +148,6 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 	@Override
 	public Object Visit(Input d, Object o) {
 
-		this.cg.comment("Read");
 		for (Expression def : d.getExp()) {
 			def.Accept(av, o);
 			this.cg.in(def.getType().getSuffix());
@@ -136,9 +162,22 @@ public class ExecuteVisitor extends abstractCodeGeneratorVisitor {
 
 		for (Expression def : d.getExp()) {
 			this.cg.print("\t' * Write");
-			def.Accept(vv, o);
-			this.cg.out(def.getType().getSuffix());
 
+			if (def.getType() instanceof ArrayType) {
+				ArrayType ar = ((ArrayType) def.getType());
+				for (int i = 0; i < (ar).getSize(); i++) {
+					// hacemos una version falsa de ArrayInvocation
+					ArrayInvocation dummyar = new ArrayInvocation(def.getLine(), def.getColumn(), ar.getType(), def,
+							new ConstantInt(def.getLine(), def.getColumn(), i));
+					// llamamos a su valuevisitor para obtener valor
+					dummyar.Accept(vv, d);
+					// lo imprimimos
+					this.cg.out(ar.getType().getSuffix());
+				}
+			} else {
+				def.Accept(vv, d);
+				this.cg.out(def.getType().getSuffix());
+			}
 		}
 		return null;
 	}

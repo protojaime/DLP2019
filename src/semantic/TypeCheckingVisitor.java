@@ -17,11 +17,14 @@ import ast.expressions.UnaryMinus;
 import ast.expressions.UnaryNot;
 import ast.statements.Asigment;
 import ast.statements.IfStatement;
+import ast.statements.Print;
 import ast.statements.Return;
 import ast.statements.WhileStatement;
 import ast.types.ArrayType;
+import ast.types.CharType;
 import ast.types.ErrorType;
 import ast.types.FuncionType;
+import ast.types.StructType;
 import ast.types.Type;
 import ast.types.VoidType;
 
@@ -43,11 +46,23 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 		super.Visit(d, o);
 		Type t = d.getExpressionA().getType().promotesTo(d.getExpressionB().getType());
 		if (t == null) {
+
 			new ErrorType(d.getLine(), d.getColumn(),
 					"the types of the variable to be asigned and of the asigment expression are not compatible",
 					ErrorHandler.getEH());
-			System.out.println(d.getExpressionA().getType() + "-" + d.getExpressionB().getType());
+
 			return null;
+		}
+		if ((t instanceof ArrayType && !(((ArrayType) t).getType() instanceof CharType)) || t instanceof StructType) {
+
+			new ErrorType(d.getLine(), d.getColumn(), "assigment of this type is not supported", ErrorHandler.getEH());
+		}
+		if ((t instanceof ArrayType && ((ArrayType) d.getExpressionA().getType())
+				.getSize() > ((ArrayType) d.getExpressionB().getType()).getSize())) {
+
+			new ErrorType(d.getLine(), d.getColumn(),
+					"the array you are trying to asign is smaller that the one you are trying to asign it into",
+					ErrorHandler.getEH());
 		}
 		return null;
 	}
@@ -209,6 +224,24 @@ public class TypeCheckingVisitor extends AbstractVisitor implements Visitor {
 	public Object Visit(FuncionDefinition d, Object o) {
 
 		super.Visit(d, (((FuncionType) d.getType())).getReturnType());
+		return null;
+	}
+
+	@Override
+	public Object Visit(Print d, Object o) {
+		super.Visit(d, o);
+		for (Expression e : d.getExp()) {
+			if (e.getType().isBuildInType()
+					|| (e.getType() instanceof ArrayType && ((ArrayType) e.getType()).getType() instanceof CharType)) {
+				return null;
+			} else {
+
+				Type t = new ErrorType(d.getLine(), d.getColumn(),
+						"the type of the expression you are tying to print is not valid", ErrorHandler.getEH());
+				e.setType(t);
+				return null;
+			}
+		}
 		return null;
 	}
 

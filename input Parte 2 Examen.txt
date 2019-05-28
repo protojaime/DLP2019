@@ -14,6 +14,6 @@ hello=world;
 print hello;
 world=hw;
 print world;
-#hw=hello;#error
-#intVector1=intVector2;#error
+#hw=hello;
+#intVector1=intVector2;
 }
